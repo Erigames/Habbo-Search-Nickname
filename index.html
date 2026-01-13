@@ -6,11 +6,11 @@
     <title>Habbo Blue Scanner</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Titillium+Web:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        /* --- TEMA AZUL TECH (SEM NEON ROXO) --- */
+        /* --- TEMA AZUL TECH --- */
         :root {
-            --tech-blue: #00a8ff;   /* Azul claro vibrante */
-            --dark-blue: #051e3e;   /* Fundo profundo */
-            --card-bg: rgba(10, 30, 60, 0.85); /* Fundo dos cards */
+            --tech-blue: #00a8ff;
+            --dark-blue: #051e3e;
+            --card-bg: rgba(10, 30, 60, 0.85);
             --border-color: rgba(0, 168, 255, 0.3);
             --text-main: #e6f1ff;
             --text-dim: #8b9bb4;
@@ -18,7 +18,7 @@
 
         body {
             font-family: 'Titillium Web', sans-serif;
-            background-color: #020b16; /* Quase preto, levemente azul */
+            background-color: #020b16;
             background-image: 
                 linear-gradient(0deg, transparent 24%, rgba(0, 168, 255, .03) 25%, rgba(0, 168, 255, .03) 26%, transparent 27%, transparent 74%, rgba(0, 168, 255, .03) 75%, rgba(0, 168, 255, .03) 76%, transparent 77%, transparent),
                 linear-gradient(90deg, transparent 24%, rgba(0, 168, 255, .03) 25%, rgba(0, 168, 255, .03) 26%, transparent 27%, transparent 74%, rgba(0, 168, 255, .03) 75%, rgba(0, 168, 255, .03) 76%, transparent 77%, transparent);
@@ -32,20 +32,19 @@
             padding: 40px 20px;
         }
 
-        /* Título */
         h1 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             margin-bottom: 10px;
             color: var(--tech-blue);
             text-shadow: 0 0 15px rgba(0, 168, 255, 0.4);
             border-bottom: 2px solid var(--tech-blue);
             padding-bottom: 10px;
+            text-align: center;
         }
 
-        /* Caixa de Instruções */
         .instructions {
             background: rgba(0, 168, 255, 0.05);
             border-left: 4px solid var(--tech-blue);
@@ -58,15 +57,23 @@
             color: var(--text-dim);
         }
         .instructions strong { color: var(--tech-blue); }
+        
+        /* Estilo para a imagem de exemplo */
+        .example-image {
+            max-width: 100%;
+            margin-top: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.1);
+        }
 
-        /* Área de Busca */
         .search-wrapper {
             width: 100%;
             max-width: 750px;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         textarea {
@@ -82,7 +89,7 @@
             outline: none;
             resize: vertical;
             transition: 0.3s;
-            box-sizing: border-box; /* Garante que padding não estoure a largura */
+            box-sizing: border-box;
         }
 
         textarea:focus {
@@ -111,8 +118,26 @@
             box-shadow: 0 0 20px rgba(0, 168, 255, 0.4);
             transform: translateY(-2px);
         }
+        
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
 
-        /* Container de Resultados */
+        #status-bar {
+            width: 100%;
+            max-width: 750px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--tech-blue);
+            min-height: 25px;
+        }
+
         #results-container {
             display: flex;
             flex-wrap: wrap;
@@ -120,10 +145,9 @@
             gap: 25px;
             width: 100%;
             max-width: 1200px;
-            margin-bottom: 60px; /* Espaço para o rodapé */
+            margin-bottom: 60px;
         }
 
-        /* Cartões */
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -154,6 +178,7 @@
             font-family: 'Rajdhani', sans-serif;
             color: var(--tech-blue);
             font-size: 1.5rem;
+            word-wrap: break-word;
         }
 
         .motto {
@@ -162,6 +187,7 @@
             font-style: italic;
             margin-bottom: 15px;
             min-height: 20px;
+            word-wrap: break-word;
         }
 
         .info-row {
@@ -175,12 +201,10 @@
         .label { color: #5c708a; font-weight: 600; }
         .value { color: #fff; text-align: right; }
 
-        /* Status */
         .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
         .online { background-color: #00ff88; box-shadow: 0 0 8px #00ff88; }
         .offline { background-color: #ff3333; }
 
-        /* Lista de Grupos */
         .group-list {
             list-style: none; padding: 0; margin-top: 10px; text-align: left;
             max-height: 100px; overflow-y: auto; font-size: 0.8rem;
@@ -193,7 +217,6 @@
             color: #cfd8e3;
         }
 
-        /* Rodapé */
         footer {
             margin-top: auto;
             padding: 20px;
@@ -209,155 +232,161 @@
 </head>
 <body>
 
-    <h1>Habbo Data Scanner</h1>
+    <h1>BUSCA POR HABBO PELO NICKNAME</h1>
 
     <div class="instructions">
         <p><strong>MODOS DE PESQUISA ACEITOS:</strong></p>
         <ul style="margin: 0; padding-left: 20px;">
-            <li><strong>Lista Formatada:</strong> Cole sua lista completa (Ex: <code>01 • Nome - Data...</code>). O sistema detecta automaticamente o nome entre "• " e " -".</li>
-            <li><strong>Múltiplos Nomes:</strong> Separados por barra (Ex: <code>Nome1 / Nome2 / Nome3</code>).</li>
+            <li>
+                <strong>Lista Formatada:</strong> Cole sua lista completa. O sistema detecta automaticamente o nome entre "• " e " -".
+                <br>
+                <img src="image_2.png" alt="Exemplo de lista formatada" class="example-image">
+            </li>
+            <li style="margin-top: 15px;"><strong>Múltiplos Nomes:</strong> Separados por barra (Ex: <code>Nome1 / Nome2 / Nome3</code>).</li>
             <li><strong>Nome Único:</strong> Apenas um nome por linha ou sozinho na caixa.</li>
         </ul>
     </div>
     
     <div class="search-wrapper">
         <textarea id="inputTexto" placeholder="Insira os nomes ou cole a lista aqui..."></textarea>
-        <button onclick="iniciarScanner()">🔍 Pesquisar Usuários</button>
+        <button id="btnPesquisar" onclick="iniciarScanner()">🔍 Pesquisar Usuários</button>
     </div>
+
+    <div id="status-bar"></div>
 
     <div id="results-container"></div>
 
     <footer>
-        Desenvolvido por <strong>Erigames</strong> &copy; 2024
+        Desenvolvido por <strong>Erigames</strong> &copy; 2026
     </footer>
 
     <script>
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
         async function iniciarScanner() {
             const rawText = document.getElementById('inputTexto').value;
             const container = document.getElementById('results-container');
+            const statusBar = document.getElementById('status-bar');
+            const btn = document.getElementById('btnPesquisar');
             
-            container.innerHTML = ''; // Limpa resultados anteriores
+            container.innerHTML = ''; 
+            statusBar.innerText = '';
 
             if (!rawText.trim()) {
                 alert("Por favor, insira algum nome ou lista.");
                 return;
             }
 
-            // --- LÓGICA DE INTELIGÊNCIA DE TEXTO ---
+            btn.disabled = true;
+            btn.innerText = "⏳ Processando...";
+
             let listaNomes = [];
-            const linhas = rawText.split('\n'); // Divide tudo por linhas primeiro
+            const linhas = rawText.split('\n');
 
             linhas.forEach(linha => {
                 const linhaLimpa = linha.trim();
                 if(!linhaLimpa) return;
 
-                // 1. Tenta identificar o padrão complexo da Lista
-                // Procura EXATAMENTE: bolinha + espaço(s) + NOME + espaço(s) + traço
                 const matchLista = linha.match(/•\s+(.+?)\s+-\s/);
 
                 if (matchLista && matchLista[1]) {
-                    // Se achou o padrão da lista, pega o nome (grupo 1 do regex)
                     listaNomes.push(matchLista[1].trim());
-                } 
-                // 2. Se não for lista, verifica se tem barras "/"
-                else if (linha.includes('/')) {
+                } else if (linha.includes('/')) {
                     const partes = linha.split('/');
-                    partes.forEach(p => {
-                        if(p.trim()) listaNomes.push(p.trim());
-                    });
-                }
-                // 3. Se não for nenhum dos dois, assume que a linha é apenas um nome
-                else {
+                    partes.forEach(p => { if(p.trim()) listaNomes.push(p.trim()); });
+                } else {
                     listaNomes.push(linhaLimpa);
                 }
             });
 
-            // Remove duplicatas e nomes vazios
             listaNomes = [...new Set(listaNomes)];
 
             if (listaNomes.length === 0) {
                 container.innerHTML = '<p style="color:white; text-align:center;">Nenhum nome válido identificado.</p>';
+                btn.disabled = false;
+                btn.innerText = "🔍 Pesquisar Usuários";
                 return;
             }
 
-            // Inicia o processamento
-            for (const nome of listaNomes) {
+            for (let i = 0; i < listaNomes.length; i++) {
+                const nome = listaNomes[i];
+                statusBar.innerText = `Analisando ${i + 1} de ${listaNomes.length}: ${nome}...`;
                 await criarCardUsuario(nome, container);
+                if (i < listaNomes.length - 1) {
+                    await delay(1200); 
+                }
             }
+
+            statusBar.innerText = `Concluído! ${listaNomes.length} nomes verificados.`;
+            btn.disabled = false;
+            btn.innerText = "🔍 Pesquisar Usuários";
         }
 
         async function criarCardUsuario(nome, container) {
-            // Cria elemento placeholder enquanto carrega
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `<p style="color:var(--text-dim); margin-top:50%;">Carregando <strong>${nome}</strong>...</p>`;
-            container.appendChild(card);
+            const cardWrapper = document.createElement('div');
+            container.appendChild(cardWrapper);
 
             try {
-                // Busca na API (via Proxy)
                 const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.habbo.com.br/api/public/users?name=${nome}`)}`;
+                
                 const res = await fetch(url);
-                
                 if (res.status === 404) throw new Error("404");
-                const dados = await res.json();
                 
-                if (dados.error) throw new Error("Erro");
+                const dados = await res.json();
+                if (dados.error) throw new Error("ErroHabbo");
 
-                // Formatar Data
                 let dataFormatada = "Oculto";
                 if(dados.lastAccessTime) {
                     const d = new Date(dados.lastAccessTime);
-                    // Formato DD/MM às HH:MM
                     dataFormatada = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')} às ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
                 }
 
-                // Buscar Grupos
                 const gruposHTML = await buscarGruposHTML(dados.uniqueId);
 
-                // Atualiza o conteúdo do card com os dados reais
-                card.innerHTML = `
-                    <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?figure=${dados.figureString}&size=l&direction=3&head_direction=3" class="avatar-img">
-                    <h2>${dados.name}</h2>
-                    <div class="motto">${dados.motto || ''}</div>
-                    
-                    <div class="info-row">
-                        <span class="label">Status</span>
-                        <span class="value" style="color:${dados.online ? '#00ff88' : '#ff3333'}">
-                            <span class="status-dot ${dados.online ? 'online' : 'offline'}"></span>${dados.online ? 'ONLINE' : 'OFFLINE'}
-                        </span>
-                    </div>
+                cardWrapper.outerHTML = `
+                    <div class="card">
+                        <img src="https://www.habbo.com.br/habbo-imaging/avatarimage?figure=${dados.figureString}&size=l&direction=3&head_direction=3" class="avatar-img">
+                        <h2>${dados.name}</h2>
+                        <div class="motto">${dados.motto || ''}</div>
+                        
+                        <div class="info-row">
+                            <span class="label">Status</span>
+                            <span class="value" style="color:${dados.online ? '#00ff88' : '#ff3333'}">
+                                <span class="status-dot ${dados.online ? 'online' : 'offline'}"></span>${dados.online ? 'ONLINE' : 'OFFLINE'}
+                            </span>
+                        </div>
 
-                    <div class="info-row">
-                        <span class="label">Último Login</span>
-                        <span class="value">${dataFormatada}</span>
-                    </div>
+                        <div class="info-row">
+                            <span class="label">Último Login</span>
+                            <span class="value">${dataFormatada}</span>
+                        </div>
 
-                    <div style="margin-top:15px; text-align:left;">
-                        <span class="label" style="font-size:0.75rem; text-transform:uppercase;">Grupos / Emblemas</span>
-                        <ul class="group-list">${gruposHTML}</ul>
+                        <div style="margin-top:15px; text-align:left;">
+                            <span class="label" style="font-size:0.75rem; text-transform:uppercase;">Grupos / Emblemas</span>
+                            <ul class="group-list">${gruposHTML}</ul>
+                        </div>
                     </div>
                 `;
 
             } catch (err) {
-                // Em caso de erro (banido ou não existe)
-                card.style.borderColor = '#ff3333';
-                card.style.background = 'rgba(60, 10, 10, 0.8)';
-                card.innerHTML = `
-                    <div style="font-size:3rem; margin-top:20px;">🚫</div>
-                    <h2 style="color:#ff3333">${nome}</h2>
-                    <p style="color:#aaa;">Usuário não encontrado<br>ou banido.</p>
+                cardWrapper.outerHTML = `
+                    <div class="card" style="border-color: #ff3333; background: rgba(60, 10, 10, 0.8);">
+                        <div style="font-size:3rem; margin-top:20px;">🚫</div>
+                        <h2 style="color:#ff3333">${nome}</h2>
+                        <p style="color:#aaa;">Usuário não encontrado<br>ou banido.</p>
+                    </div>
                 `;
             }
         }
 
         async function buscarGruposHTML(id) {
             try {
+                await delay(300); 
                 const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.habbo.com.br/api/public/users/${id}/groups`)}`;
                 const res = await fetch(url);
                 const grupos = await res.json();
                 
                 if(!grupos.length) return '<li>Nenhum grupo público.</li>';
-                
                 return grupos.slice(0, 10).map(g => `<li>🛡️ ${g.name}</li>`).join('');
             } catch {
                 return '<li>Erro ao carregar grupos.</li>';
